@@ -73,12 +73,15 @@ namespace Halting
         /// Entry point.  Searches through a subset of the total theoretical problem space of computations
         /// over a single natural number.
         /// </summary>
-        /// <param name="args"></param>
+        /// <param name="args">Arguments</param>
         static void Main(string[] args)
         {
-            Console.BufferWidth = 100;
+            Console.BufferWidth = 95;
+            Console.WindowWidth = 95;
+            Console.WindowHeight = 67;
+            Console.Title = "Halting Problem demonstration in C#";
 
-            // Simuate search through a small sub-set of the problem space where we know to contain an 
+            // Simulate search through a small sub-set of the problem space where we know to contain an 
             // example of a Gödel sentance.
             for (var computationIndex = 1U; computationIndex <= 8U; computationIndex++)
             {
