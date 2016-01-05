@@ -20,6 +20,7 @@
 namespace Halting
 {
     using System;
+    using System.Drawing;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Reflection;
@@ -76,13 +77,18 @@ namespace Halting
         /// <param name="args">Arguments</param>
         static void Main(string[] args)
         {
-            Console.BufferWidth = 95;
-            Console.WindowWidth = 95;
-            Console.WindowHeight = 67;
+            // Set the console font to size 24 for default TrueType font.
+            ConsoleHelper.SetCurrentConsoleFont(null, 24);
+
+            var width = (Console.LargestWindowWidth < 95) ? Console.LargestWindowWidth: 95;
+            var height = (Console.LargestWindowHeight < 67) ? Console.LargestWindowHeight : 67;
+
+            Console.SetWindowSize(width, height);
+            Console.BufferWidth = width;
+            Console.BufferHeight = height;
             Console.Title = "Halting Problem demonstration in C#";
 
-            // Simulate search through a small sub-set of the problem space where we know to contain an 
-            // example of a Gödel sentance.
+            // Search through subset of the problem space.
             for (var computationIndex = 1U; computationIndex <= 8U; computationIndex++)
             {
                 for (var naturalNumber = 1U; naturalNumber <= 8U; naturalNumber++)
@@ -99,8 +105,8 @@ namespace Halting
         /// Represents the assessment function to assesses computations that take a natural
         /// number as an argument.  This method will always halt if it determines that the
         /// computation does not halt.  If it cannot determine if the computation halts, it
-        /// continues in an edless loop.  NB. the user is prompted to break the loop, for
-        /// convenience.
+        /// continues in an endless loop.  NB. the loop is automatically broken for
+        /// convenience and demonstration purposes.
         /// </summary>
         /// <param name="computationIndex">The computation index.</param>
         /// <param name="naturalNumber">The natural number.</param>
@@ -136,7 +142,7 @@ namespace Halting
             // Set the text used to identify the assessor in the output.
             var assessor = string.Format("Assessor({0}, {0})", naturalNumber);
 
-            // If the natural number is the same as the comutation index for the 
+            // If the natural number is the same as the computation index for the 
             // delegate that represents this assessor as a computation in the 
             // Computation dictionary, we reflect this by changing the text used 
             // to identify the assessor in the output.
@@ -157,13 +163,20 @@ namespace Halting
         /// <param name="naturalNumber">The natural number.</param>
         static void DoAssessmentTest(string assessor, uint computationIndex, uint naturalNumber)
         {
-            if (IsComputationKnownToNeverHalt(assessor, computationIndex, naturalNumber))
+            try
             {
-                // Halt the assessment on determining that the computation does not halt
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine(string.Format("{0} halts, therefore the program knows that Computation_{1}({2}) does not halt.", assessor, computationIndex, naturalNumber));
-                Console.ResetColor();
-                return;
+                if (IsComputationKnownToNeverHalt(assessor, computationIndex, naturalNumber))
+                {
+                    // Halt the assessment on determining that the computation does not halt
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine(string.Format("{0} halts, therefore the program knows that Computation_{1}({2}) does not halt.", assessor, computationIndex, naturalNumber));
+                    Console.ResetColor();
+                    return;
+                }
+            }
+            catch (ApplicationException)
+            { 
+                // Do nothing here.
             }
         }
 
@@ -171,7 +184,7 @@ namespace Halting
         /// Tests to see if we can determine if a comutatin over a single natural number is known to
         /// never halt.
         /// </summary>
-        /// <param name="assessor"></param>
+        /// <param name="assessor">A text representation of the assessor identity.</param>
         /// <param name="computationIndex">The computation index.</param>
         /// <param name="naturalNumber">The natural number.</param>
         /// <returns>True, if the computation is known to never halt; otherwise, false.</returns>
@@ -198,7 +211,7 @@ namespace Halting
                     {
                         if (inLoop)
                         {
-                            return;
+                            throw new ApplicationException();
                         }
 
                         inLoop = true;
