@@ -54,7 +54,7 @@ Now consider the following.
 
 &nbsp;&nbsp;&nbsp;&nbsp;A(*n*, *n*) is logically equivalent to A(*n*).
 
-&nbsp;&nbsp;&nbsp;&nbsp;A(*n*) is a computation over a natural number.  It is therefore a member of the set of all such computations, i.e., a member of the set of C.  We will use k to represent the number of this computation.  So we can state the following.
+A(*n*) is a computation over a natural number.  It is therefore a member of the set of all such computations, i.e., a member of the set of C.  We will use k to represent the number of this computation.  So we can state the following.
 
 &nbsp;&nbsp;&nbsp;&nbsp;A(*n*, *n*) = C*k*(*n*)
 
