@@ -34,37 +34,37 @@ Let’s explore the logic.  We need to state the notions of computations and the
 
 We will consider computations that take a natural number as an argument.  We will represent such a number as ‘*n*’.  Each computation, then, has the following signature:
 
-<center>C(<span style='font-style: italic;'>n</span>)</center><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;C(*n*)<br/>
 
 We can provide a unique number to identify each computation.  We will use the set of natural numbers to do this, where *q* is the number that identifies each individual computation:
 
-<center>C<span style='font-style: italic;'>q</span>(<span style='font-style: italic;'>n</span>)</center><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;C*q*(*n*)
 
 Let’s now consider A.  This algorithmic procedure will search through the problem space.  The problem space consists of every possible C*q*(*n*), so A needs to be called repeatedly for every combination of *q* and *n*<span style="color:cyan;vertical-align: super;font-size:8pt;">3</span>.  A, then, has the following signature:
 
-<center>A(<span style='font-style: italic;'>q</span>, <span style='font-style: italic;'>n</span>)</center><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;A(*q*, *n*)
 
 Now we have specified all Cs and A, we can reason thus:
 
 Consider when *q* equals *n*.  We substitute *n* for *q*.  We can now assert the following:
 
-<center>If A(<span style='font-style: italic;'>n</span>, <span style='font-style: italic;'>n</span>) halts, then we know that C<span style='font-style: italic;'>n</span>(<span style='font-style: italic;'>n</span>) does not halt.</center><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;If A*n*, *n*) halts, then we know that C*n*(*n*) does not halt.
 
 Now consider the following.
 
-<center>A(<span style='font-style: italic;'>n</span>, <span style='font-style: italic;'>n</span>) is logically equivalent to A(<span style='font-style: italic;'>n</span>).</center><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;A(*n*, *n*) is logically equivalent to A(*n*).
 
-A(*n*) is a computation over a natural number.  It is therefore a member of the set of all such computations, i.e., a member of the set of C.  We will use k to represent the number of this computation.  So we can state the following.
+&nbsp;&nbsp;&nbsp;&nbsp;A(*n*) is a computation over a natural number.  It is therefore a member of the set of all such computations, i.e., a member of the set of C.  We will use k to represent the number of this computation.  So we can state the following.
 
-<center>A(<span style='font-style: italic;'>n</span>, <span style='font-style: italic;'>n</span>) = C<span style='font-style: italic;'>k</span>(<span style='font-style: italic;'>n</span>)</center><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;A(*n*, *n*) = C*k*(*n*)
 
 We can now re-state the previous assertion for *q* = *n*, as follows:
 
-<center>If C<span style='font-style: italic;'>k</span>(<span style='font-style: italic;'>n</span>) halts, then we know that C<span style='font-style: italic;'>n</span>(<span style='font-style: italic;'>n</span>) does not halt.</center><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;If C*k*(*n*) halts, then we know that C*n*(*n*) does not halt.
 
 Now consider the situation when *k* equals *n*.  In this case, simply substituting *k* for *n* we can re-state the assertion above as follows.
 
-<center><span style='font-weight: bold;'>If C<span style='font-style: italic;'>k</span>(<span style='font-style: italic;'>k</span>) halts, then we know that C<span style='font-style: italic;'>k</span>(<span style='font-style: italic;'>k</span>) does not halt.</span></center><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;**If C*k*(*k*) halts, then we know that C*k*(*k*) does not halt.**
 
 This is a contradiction.  If C*k*(*k*), which is equal to A(*k*, *k*), were actually to halt, then we would know that it never halts…which it just has!  This cannot be supported by a consistent system.  Hence, assuming that the logic implemented in our A is sound (which implies logical consistency of the system as a whole), our only option is to infer that C*k*(*k*) never halts.  It is the only possible behaviour that C*k*(*k*) could exhibit.  It means that our effective procedure, C*k*(*k*), which never halts, cannot determine formally that the computation C*k*(*k*) never halts, even though we know it never does.  This feels very un-intuitive.  Our effective procedure implements every possible computational method of determining if a computation never halts, so somehow we have determined something that our algorithmic effective procedure can never determine.
 
@@ -99,11 +99,11 @@ To aid the demonstration, the helper method enters a loop every time it fails to
 
 The code is written to initially use the default simulated test in all cases.  The DoAssessment overload has been carefully added to the computation dictionary at index 6.  Hence the simulated test determines that it does not halt and reports the following:
 
-Computation_6(6) halts, therefore the program knows that Computation_6(6) does not halt.
+&nbsp;&nbsp;&nbsp;&nbsp;Computation_6(6) halts, therefore the program knows that Computation_6(6) does not halt.
 
 This message, of course, makes no logical sense.  Our only way to fix what is clearly a logical bug is to add a special test for Computation_6(6).  This test fails to determine if the computation halts.  The test is compiled by un-commenting the AssessorTest symbol at the top of the code.  Now, when the code runs, the program reports the following:
 
-Computation_6(6) does not halt, therefore the program does not know if Computation_6(6) halts.
+&nbsp;&nbsp;&nbsp;&nbsp;Computation_6(6) does not halt, therefore the program does not know if Computation_6(6) halts.
 
 This message reflects the fact that we know the computation does not halt.  The DoAssessment overload, when invoked with the value 6, enters the ‘never-ending’ loop.  It is simulating the testing of the DoAssessment overload, as the computation, when invoked with the value 6.  The only logical option available to us is to report that the program cannot determine the non-halting behaviour of the computation, even though, as the accessor, the same code reports that it does not halt.  The messages deliberately refer to what the program ‘knows’.  The reader might wish to reflect on the apparent difference here between the insight available to humans and the knowledge that can be deduced by the programme.
 
@@ -190,7 +190,7 @@ It’s something that cannot be done. So we users
 must find our own bugs; our computers are losers!
 <br/>
 ___
-  <span style="color:cyan;vertical-align: super;font-size:8pt;">1</span>&nbsp;The interesting question here is how to decide a formally undecidable problem.  In fact, a problem can only be deemed formally decidable (or undecidable) within the context of a given formal system.  If a problem is formally undecidable in one formal system, it may still be formally decidable within another.  The Halting Problem describes a formally undecidable problem in computation – that is, no Turing-complete computer can decide the problem.  The problem may still be decidable through non-computational methods.
+<span style="color:cyan;vertical-align: super;font-size:8pt;">1</span>&nbsp;The interesting question here is how to decide a formally undecidable problem.  In fact, a problem can only be deemed formally decidable (or undecidable) within the context of a given formal system.  If a problem is formally undecidable in one formal system, it may still be formally decidable within another.  The Halting Problem describes a formally undecidable problem in computation – that is, no Turing-complete computer can decide the problem.  The problem may still be decidable through non-computational methods.
 
 <span style="color:cyan;vertical-align: super;font-size:8pt;">2</span>&nbsp;However, recall that computation may never be completed for a semi-decidable problem.  The Halting Problem is semi-decidable.
 
