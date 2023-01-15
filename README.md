@@ -150,7 +150,8 @@ December 2015 
 
 ___
 
-<span style='font-size: 18pt;font-weight:600;'>Scooping the Loop Snooper</span><br/><span style='font-weight:600;'>an elementary proof of the undecidability of the halting problem</span>
+# Scooping the Loop Snooper</span><br/><span style='font-weight:600;'>
+### an elementary proof of the undecidability of the halting problem</span>
  
 **Geoffrey K. Pullum**, University of Edinburgh<br/><br/>
 
