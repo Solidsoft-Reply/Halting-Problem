@@ -192,7 +192,7 @@ and start off again, looping endlessly back,
 And this program called Q wouldn’t stay on the shelf;  
 I would run it, and (fiendishly) feed it itself.  
 What behaviour results when I do this with Q?  
-When it reads its own source, just what will it do<span style="color:cyan;vertical-align: super;font-size:8pt;">4</span>?
+When it reads its own source, just what will it do<span style="color:cyan;vertical-align: super;font-size:8pt;">[4]</span>?
 
 If P warns of loops, Q will print “Loop!” and quit;  
 yet P is supposed to speak truly of it.  
