@@ -77,7 +77,7 @@ Now we have specified all Cs and A, we can reason thus:
 
 Consider when *q* equals *n*. We substitute *n* for *q*. We can now assert the following:
 
-&nbsp;&nbsp;&nbsp;&nbsp;If A*n*, *n*) halts, then we know that C*n*(*n*) does not halt.  
+&nbsp;&nbsp;&nbsp;&nbsp;If A(*n*, *n*) halts, then we know that C*n*(*n*) does not halt.  
 
 Now consider the following.
 
